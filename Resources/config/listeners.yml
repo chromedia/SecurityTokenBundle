@@ -1,0 +1,8 @@
+services:
+    listener.chromedia.token_authenticated_request:
+        class: Chromedia\SecurityTokenBundle\Listener\TokenAuthenticatedRequestListener
+        tags:
+            - { name: kernel.event_listener, event: kernel.controller, method: onKernelController }
+        calls:
+            - [setAuthorizationHeaderKey, [%chromedia_security_token.authorization_header_key%]]
+        

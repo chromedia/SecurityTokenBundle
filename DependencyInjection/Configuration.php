@@ -22,8 +22,17 @@ class Configuration implements ConfigurationInterface
         
         $rootNode->children()
             ->enumNode('encryption')
-                ->values(array('md5'))
-            ->end();
+                ->values(array('md5', 'sha256'))
+            ->end()
+            ->scalarNode('token_provider')
+                ->isRequired()
+                ->cannotBeEmpty()
+            ->end()
+            ->scalarNode('authorization_header_key')
+                ->isRequired()
+                ->cannotBeEmpty()
+            ->end()
+        ;
 
         return $treeBuilder;
     }

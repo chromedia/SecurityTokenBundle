@@ -24,5 +24,11 @@ class ChromediaSecurityTokenExtension extends Extension
 
         $loader = new Loader\YamlFileLoader($container, new FileLocator(__DIR__.'/../Resources/config'));
         $loader->load('services.yml');
+        $loader->load('listeners.yml');
+        
+        // add the authorization header key parameter
+        $container->setParameter($this->getAlias().'.authorization_header_key', $config['authorization_header_key']);
+        
+      
     }
 }
