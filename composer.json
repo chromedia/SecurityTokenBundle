@@ -6,5 +6,5 @@
     "autoload": {
         "psr-0": { "Chromedia\\SecurityTokenBundle": "" }
     },
-    "target-dir": "Chromedia/SecurityTokenBundle",
+    "target-dir": "Chromedia/SecurityTokenBundle"
 }
