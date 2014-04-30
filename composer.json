@@ -1,0 +1,10 @@
+{
+    "name": "chromedia/security-token-bundle",
+    "require": {
+        "php": ">=5.3.2"
+    },
+    "autoload": {
+        "psr-0": { "Chromedia\\SecurityTokenBundle": "" }
+    },
+    "target-dir": "Chromedia/SecurityTokenBundle",
+}
