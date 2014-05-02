@@ -29,6 +29,14 @@ class ChromediaSecurityTokenExtension extends Extension
         // add the authorization header key parameter
         $container->setParameter($this->getAlias().'.authorization_header_key', $config['authorization_header_key']);
         
+        $container->setParameter($this->getAlias().'.access_key_request_parameter', $config['access_key_request_parameter']);
+        $container->setParameter($this->getAlias().'.access_token_request_parameter', $config['access_token_request_parameter']);
+        
+        // add service for token_provider, set it an alias since we require that this will be a defined service already
+        $container->setAlias($this->getAlias().'.token_provider', $config['token_provider']);
+        
+        
+        
       
     }
 }

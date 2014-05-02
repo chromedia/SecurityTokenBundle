@@ -32,8 +32,13 @@ class Configuration implements ConfigurationInterface
                 ->isRequired()
                 ->cannotBeEmpty()
             ->end()
+            ->scalarNode('access_key_request_parameter')
+                ->defaultValue('access_key')
+            ->end()
+            ->scalarNode('access_token_request_parameter')
+                ->defaultValue('access_token')
+            ->end()
         ;
-
         return $treeBuilder;
     }
 }
