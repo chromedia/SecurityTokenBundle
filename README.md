@@ -13,11 +13,13 @@ Chromedia Security Token Bundle
 		#required
     	token_provider: service_id_for_your_token_provider
     	encryption: md5 | sha256
+    	authorization_header_key: key_to_be_used_in_headers
 
     	# optional
-    	authorization_header_key: key_to_be_used_in_headers
-    	access_key_request_parameter: access_key_request_parameter_name
-    	access_token_request_parameter: access_token_request_parameter_name
+    	access_key_request_parameter: access_key
+    	access_token_request_parameter: access_token
+    	# token expiration in hours
+    	token_expiration: 1
 
 ```
 

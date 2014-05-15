@@ -19,7 +19,7 @@ class Configuration implements ConfigurationInterface
     {
         $treeBuilder = new TreeBuilder();
         $rootNode = $treeBuilder->root('chromedia_security_token');
-        
+
         $rootNode->children()
             ->enumNode('encryption')
                 ->values(array('md5', 'sha256'))
@@ -37,6 +37,9 @@ class Configuration implements ConfigurationInterface
             ->end()
             ->scalarNode('access_token_request_parameter')
                 ->defaultValue('access_token')
+            ->end()
+            ->scalarNode('token_expiration')
+                ->defaultValue(1)
             ->end()
         ;
         return $treeBuilder;

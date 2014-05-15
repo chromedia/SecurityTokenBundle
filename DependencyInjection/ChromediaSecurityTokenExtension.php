@@ -25,18 +25,16 @@ class ChromediaSecurityTokenExtension extends Extension
         $loader = new Loader\YamlFileLoader($container, new FileLocator(__DIR__.'/../Resources/config'));
         $loader->load('services.yml');
         $loader->load('listeners.yml');
-        
+
         // add the authorization header key parameter
         $container->setParameter($this->getAlias().'.authorization_header_key', $config['authorization_header_key']);
-        
+
         $container->setParameter($this->getAlias().'.access_key_request_parameter', $config['access_key_request_parameter']);
         $container->setParameter($this->getAlias().'.access_token_request_parameter', $config['access_token_request_parameter']);
-        
+
         // add service for token_provider, set it an alias since we require that this will be a defined service already
         $container->setAlias($this->getAlias().'.token_provider', $config['token_provider']);
-        
-        
-        
-      
+
+        $container->setParameter($this->getAlias().'.token_expiration', (int)$config['token_expiration']);
     }
 }
