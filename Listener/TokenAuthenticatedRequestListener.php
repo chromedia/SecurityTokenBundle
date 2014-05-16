@@ -56,24 +56,33 @@ class TokenAuthenticatedRequestListener
         }
         
         if ($controller[0] instanceof TokenAuthenticatedController) {
-        	
+
             $request = $event->getRequest();
+
+            // key and token are in request parameters
             $accessKey = $request->get($this->accessKeyRequestParameter, null);
             $accessToken = $request->get($this->accessTokenRequestParameter, null);
-            
-            // key and token are in request parameters
-            if ( $accessKey && $accessToken) {
-                $verifiedToken = $this->tokenProvider->loadToken($accessToken, $accessKey);
-            	if ($verifiedToken) {
-            	    return;
-            	}
-            }
-            else {
+
+            if (!$accessToken) {
                 // check in headers
+                if($headers = $request->headers->get($this->authorizationHeaderKey, ''))
+                    list($accessKey,$accessToken) = $this->parseCustomHeaders($headers);
             }
-            
+
+            $verifiedToken = $this->tokenProvider->loadToken($accessToken, $accessKey);
+            if ($verifiedToken) {
+                return;
+            }
+
             // request was not authenticated
             throw new AccessDeniedHttpException('Not authorized to access this resource');
         }
+    }
+
+    public function parseCustomHeaders($headers)
+    {
+        $authorization = base64_decode($headers);
+
+        return explode(':',$authorization);
     }
 }
